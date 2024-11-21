@@ -14,7 +14,6 @@ export default function App() {
   const [currentSet, setCurrentSet] = useState(0);
   const [answers, setAnswers] = useState<string[]>(Array(allQuestions.length).fill(''));
   const [isCompleted, setIsCompleted] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(allQuestions.length * 3);
 
   const handleAnswer = (questionIndex: number, value: string) => {
     const newAnswers = [...answers];
