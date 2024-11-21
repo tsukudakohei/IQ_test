@@ -25,6 +25,7 @@ export default function App() {
   const handleNextSet = () => {
     if (currentSet < Math.floor((allQuestions.length - 1) / QUESTIONS_PER_SET)) {
       setCurrentSet(currentSet + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setIsCompleted(true);
     }
@@ -34,6 +35,13 @@ export default function App() {
     return answers.reduce((score, answer, index) => {
       return score + (answer === allQuestions[index].answer ? 1 : 0);
     }, 0);
+  };
+
+  const handlePreviousSet = () => {
+    if (currentSet > 0) {
+      setCurrentSet(currentSet - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   if (isCompleted) {
@@ -88,7 +96,14 @@ export default function App() {
         />
       ))}
 
-      <div className="flex justify-end mt-6">
+      <div className="flex justify-between mt-6">
+        <Button
+          onClick={handlePreviousSet}
+          disabled={currentSet === 0}
+          variant="outline"
+        >
+          戻る
+        </Button>
         <Button onClick={handleNextSet}>
           {isLastSet ? '完了' : '次へ'}
         </Button>
